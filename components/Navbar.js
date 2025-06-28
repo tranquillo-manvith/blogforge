@@ -5,7 +5,7 @@ export default function Navbar() {
         <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
 
             {/* Logo - Left */}
-            <Link href="/" className="text-xl font-bold text-black">
+            <Link href="/" className="text-2xl font-bold text-black">
                 BlogForge
             </Link>
 
