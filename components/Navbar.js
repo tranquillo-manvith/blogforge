@@ -18,7 +18,7 @@ export default function Navbar() {
                     <Link href="/posts">View Posts</Link>
                 </li>
                 <li>
-                    <Link href="/admin/posts">Dashboard</Link>
+                    <Link href="/admin/dashboard">Dashboard</Link>
                 </li>
             </ul>
         </nav>
