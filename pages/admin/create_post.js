@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
+import toast from 'react-hot-toast';
 
 // Quill needs dynamic import for Next.js SSR
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -32,6 +33,7 @@ export default function CreatePost() {
             const errorText = await res.text(); // catch HTML response
             throw new Error(`Request failed: ${res.status} — ${errorText}`);
         }
+        toast.success("Post Created!");
         const data = await res.json();
         console.log(data);
     };
