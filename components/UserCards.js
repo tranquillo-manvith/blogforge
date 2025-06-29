@@ -11,6 +11,7 @@ export default function UserCard({ post }) {
             <div className="text-xl font-bold">{post.title}</div>
             <div>Created On: {createdDate}</div>
             <div className='flex flex-row gap-5'>
+
                 <button onClick={() => router.push(`/blog/${post.slug}`)}
                     className='px-6 py-1 bg-green-100 text-black rounded-full hover:bg-green-500 border border-black'>
                     View
