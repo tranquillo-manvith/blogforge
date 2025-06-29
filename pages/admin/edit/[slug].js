@@ -1,6 +1,6 @@
 // pages/admin/edit/[slug].js
 import { useState } from "react";
-import dynamic from "next/dynamic"; // ← YOU NEED THIS
+import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import Head from "next/head";
 import toast from "react-hot-toast";
@@ -10,7 +10,9 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export async function getServerSideProps(context) {
     const { slug } = context.params;
-    const res = await fetch(`http://localhost:3000/api/posts/${slug}`);
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "";
+
+    const res = await fetch(`${baseUrl}/api/posts/${slug}`);
     const data = await res.json();
 
     return {
