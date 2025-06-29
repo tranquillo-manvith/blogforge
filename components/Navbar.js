@@ -15,7 +15,7 @@ export default function Navbar() {
                     <Link href="/">Home</Link>
                 </li>
                 <li>
-                    <Link href="/posts">View Posts</Link>
+                    <Link href="/users/show_posts">View Posts</Link>
                 </li>
                 <li>
                     <Link href="/admin/dashboard">Dashboard</Link>

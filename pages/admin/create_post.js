@@ -18,9 +18,22 @@ export default function CreatePost() {
         setSlug(generatedSlug);
     }, [title]);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+        const res = await fetch('/api/posts/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title, content, slug }),
+        });
         // You’ll send this to backend later
-        console.log({ title, content, slug });
+
+        if (!res.ok) {
+            const errorText = await res.text(); // catch HTML response
+            throw new Error(`Request failed: ${res.status} — ${errorText}`);
+        }
+        const data = await res.json();
+        console.log(data);
     };
 
     return (
