@@ -24,7 +24,6 @@ export default function Login() {
 
             // ✅ Store auth flag (just temporary — better to use cookies/session in real apps)
             localStorage.setItem("allowAdmin", "true");
-            window.location.reload();
             router.push("/admin/dashboard");
         } catch (err) {
             setError("Something went wrong");
