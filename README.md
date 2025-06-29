@@ -5,7 +5,7 @@ Built for an internship assignment at Truly IAS.
 
 ## 🔗 Live Demo (Future Reference)
 
-[https://your-vercel-url.vercel.app](https://your-vercel-url.vercel.app)
+[https://blogforge-ten.vercel.app/](https://blogforge-ten.vercel.app/)
 
 ## Features
 
