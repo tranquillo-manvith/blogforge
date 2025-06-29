@@ -20,6 +20,9 @@ export default function Navbar() {
                 <li>
                     <Link href="/admin/dashboard">Dashboard</Link>
                 </li>
+                <li>
+                    <Link href="/admin/login">Admin Login</Link>
+                </li>
             </ul>
         </nav>
     );
