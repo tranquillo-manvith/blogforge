@@ -47,7 +47,8 @@ export default function AdminCard({ post }) {
                 <button onClick={handleDelete} className='px-6 py-1 bg-green-100 text-black rounded-full hover:bg-green-500 border border-black'>
                     Delete
                 </button>
-                <button className='px-6 py-1 bg-green-100 text-black rounded-full hover:bg-green-500 border border-black'>
+                <button onClick={() => router.push(`/blog/${post.slug}`)}
+                    className='px-6 py-1 bg-green-100 text-black rounded-full hover:bg-green-500 border border-black'>
                     View
                 </button>
             </div>

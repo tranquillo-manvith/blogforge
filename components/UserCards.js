@@ -1,13 +1,21 @@
-export default function UserCard() {
-    return (
-        <div class='flex flex-col border rounded-md shadow-md px-5 py-5 gap-2'>
-            <div className="text-xl font-bold">Title</div>
-            <div>Created On: DD/MMM/YYYY</div>
-            <div>Last Updated: DD/MMM/YYYY</div>
-            <div className='flex flex-row gap-5'>
-                <button className='px-6 py-1 bg-green-100 text-black rounded-full hover:bg-green-500 border border-black'>View</button>
-            </div>
+import { useRouter } from "next/router";
 
+export default function UserCard({ post }) {
+    const router = useRouter();
+    const createdDate = new Date(post.createdAt).toLocaleDateString('en-IN', {
+        day: '2-digit', month: 'short', year: 'numeric'
+    });
+
+    return (
+        <div className='flex flex-col border rounded-md shadow-md px-5 py-5 gap-2'>
+            <div className="text-xl font-bold">{post.title}</div>
+            <div>Created On: {createdDate}</div>
+            <div className='flex flex-row gap-5'>
+                <button onClick={() => router.push(`/blog/${post.slug}`)}
+                    className='px-6 py-1 bg-green-100 text-black rounded-full hover:bg-green-500 border border-black'>
+                    View
+                </button>
+            </div>
         </div>
     );
 }

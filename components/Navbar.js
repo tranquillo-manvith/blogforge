@@ -1,6 +1,14 @@
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function Navbar() {
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        const stored = localStorage.getItem("allowAdmin");
+        setIsAdmin(stored === "true");
+    }, []);
+
     return (
         <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
 
@@ -17,12 +25,15 @@ export default function Navbar() {
                 <li>
                     <Link href="/users/show_posts">View Posts</Link>
                 </li>
-                <li>
-                    <Link href="/admin/dashboard">Dashboard</Link>
-                </li>
-                <li>
-                    <Link href="/admin/login">Admin Login</Link>
-                </li>
+                {isAdmin ? (
+                    <li>
+                        <Link href="/admin/dashboard">Dashboard</Link>
+                    </li>
+                ) : (
+                    <li>
+                        <Link href="/admin/login">Admin Login</Link>
+                    </li>
+                )}
             </ul>
         </nav>
     );

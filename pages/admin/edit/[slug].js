@@ -49,7 +49,7 @@ export default function EditPost({ post }) {
                 <ReactQuill value={content} onChange={setContent} />
                 <button
                     onClick={handleUpdate}
-                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+                    className="px-6 py-1 mt-4 bg-green-100 text-black rounded-full hover:bg-green-500 border border-black"
                     disabled={loading}
                 >
                     {loading ? "Updating..." : "Update Post"}
