@@ -3,6 +3,8 @@ import { useState } from "react";
 import dynamic from "next/dynamic"; // ← YOU NEED THIS
 import "react-quill/dist/quill.snow.css";
 import Head from "next/head";
+import toast from "react-hot-toast";
+import DOMPurify from 'dompurify';
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -22,15 +24,34 @@ export default function EditPost({ post }) {
     const [loading, setLoading] = useState(false);
 
     const handleUpdate = async () => {
+        if (!title.trim()) {
+            toast.error("Title cannot be empty.");
+            return;
+        }
+        if (!DOMPurify.sanitize(content).replace(/<(.|\n)*?>/g, "").trim()) {
+            toast.error("Content cannot be empty.");
+            return;
+        }
         setLoading(true);
-        const res = await fetch(`/api/posts/${post.slug}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ title, content }),
-        });
-        const data = await res.json();
-        setLoading(false);
-        alert(data.message || "Updated successfully!");
+        try {
+            const res = await fetch(`/api/posts/${post.slug}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title, content }),
+            });
+
+            if (!res.ok) {
+                const errData = await res.json();
+                throw new Error(errData.message || "Failed to update post");
+            }
+
+            toast.success("Post Updated Successfully");
+        } catch (error) {
+            console.error("Update error:", error);
+            toast.error(`Error: ${error.message}`);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (

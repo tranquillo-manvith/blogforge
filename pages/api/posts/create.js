@@ -23,6 +23,9 @@ export default async function handler(req, res) {
         return res.status(201).json(post);
     } catch (error) {
         console.error('Create Post Error:', error); // KEEP THIS
+        if (error.code === 11000) {
+            return res.status(400).json({ message: "A post with this title already exists. Try a different title." });
+        }
         return res.status(500).json({
             message: "Server error",
             error: error.message,

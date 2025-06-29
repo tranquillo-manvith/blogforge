@@ -10,31 +10,36 @@ export default function Navbar() {
     }, []);
 
     return (
-        <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
+        <nav className="mob-navbar bg-white shadow-md px-6 py-4 flex flex-row justify-between items-center">
+
 
             {/* Logo - Left */}
-            <Link href="/" className="text-2xl font-bold text-black">
-                BlogForge
-            </Link>
+            <div className='flex'>
+                <Link href="/" className="text-2xl font-bold text-black">
+                    BlogForge
+                </Link>
+            </div>
 
-            {/* Navigation Links - Right */}
-            <ul className="flex flex-row gap-10 text-black">
-                <li>
-                    <Link href="/">Home</Link>
-                </li>
-                <li>
-                    <Link href="/users/show_posts">View Posts</Link>
-                </li>
-                {isAdmin ? (
+            <div className='flex'>
+                {/* Navigation Links - Right */}
+                <ul className="flex flex-row gap-10 text-black">
                     <li>
-                        <Link href="/admin/dashboard">Dashboard</Link>
+                        <Link href="/">Home</Link>
                     </li>
-                ) : (
                     <li>
-                        <Link href="/admin/login">Admin Login</Link>
+                        <Link href="/users/show_posts">View Posts</Link>
                     </li>
-                )}
-            </ul>
+                    {isAdmin ? (
+                        <li>
+                            <Link href="/admin/dashboard">Admin Dashboard</Link>
+                        </li>
+                    ) : (
+                        <li>
+                            <Link href="/admin/login">Admin Login</Link>
+                        </li>
+                    )}
+                </ul>
+            </div>
         </nav>
     );
 }

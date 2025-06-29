@@ -29,3 +29,11 @@ body {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.mob-navbar {
+  @media (max-width: 550px) {
+    flex-direction: column;
+    font-size: 0.85rem;
+    gap: 1rem;
+  }
+}

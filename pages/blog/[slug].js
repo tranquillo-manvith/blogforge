@@ -41,11 +41,19 @@ export default function ViewPost() {
         year: "numeric",
     });
 
+    function stripHtml(html) {
+        return html.replace(/<[^>]*>?/gm, '');
+    }
+
     return (
         <>
             <Head>
-                <title>{post.title} | Blog</title>
-                <meta name="description" content={post.title} />
+                <title>{post.title} | BlogForge</title>
+                <meta name="description" content={stripHtml(post.content).slice(0, 160)} />
+                <meta property="og:title" content={post.title} />
+                <meta property="og:description" content={stripHtml(post.content).slice(0, 160)} />
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={`${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug}`} />
             </Head>
             <main className="max-w-3xl mx-auto px-6 py-10">
                 <h1 className="text-4xl font-bold mb-2">{post.title}</h1>

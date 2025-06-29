@@ -20,6 +20,14 @@ export default function CreatePost() {
     }, [title]);
 
     const handleSubmit = async () => {
+        if (!title.trim()) {
+            toast.error("Title cannot be empty.");
+            return;
+        }
+        if (!content.trim()) {
+            toast.error("Content cannot be empty.");
+            return;
+        }
         const res = await fetch('/api/posts/create', {
             method: 'POST',
             headers: {
@@ -30,12 +38,11 @@ export default function CreatePost() {
         // You’ll send this to backend later
 
         if (!res.ok) {
-            const errorText = await res.text(); // catch HTML response
-            throw new Error(`Request failed: ${res.status} — ${errorText}`);
+            const errorData = await res.json();
+            toast.error(errorData.message || "Something went wrong. Try again.");
+            return;
         }
         toast.success("Post Created!");
-        const data = await res.json();
-        console.log(data);
     };
 
     return (
