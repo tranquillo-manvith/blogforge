@@ -1,31 +1,42 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import AdminCard from '@/components/AdminCard';
+import { useRouter } from 'next/router';
 
 export default function Dashboard() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const res = await fetch('/api/posts');
-                if (!res.ok) {
-                    console.error('Failed to fetch posts');
-                    return;
-                }
-                const data = await res.json();
-                setPosts(data);
-            } catch (err) {
-                console.error('Failed to fetch posts');
-            } finally {
-                setLoading(false);
-            }
+        const allow = localStorage.getItem("allowAdmin");
 
-        };
-
-        fetchPosts();
+        if (allow === "true") {
+            setIsAdmin(true);
+            fetchPosts();
+        } else {
+            router.push('/admin/login');
+        }
     }, []);
+
+    const fetchPosts = async () => {
+        try {
+            const res = await fetch('/api/posts');
+            if (!res.ok) {
+                console.error('Failed to fetch posts');
+                return;
+            }
+            const data = await res.json();
+            setPosts(data);
+        } catch (err) {
+            console.error('Error fetching posts', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (!isAdmin) return null; // Don't render anything while redirecting
 
     return (
         <div className='flex flex-col'>
